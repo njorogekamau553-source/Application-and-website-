@@ -53,29 +53,28 @@ export default function Menu() {
   };
 
   return (
-    <div className="pt-24 min-h-screen">
-      {/* Hero Header */}
-      <section className="bg-white py-32 px-4 border-b border-[#1A1A1A]/5">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-[#FF5C00] font-black uppercase text-xs tracking-widest italic mb-4">Taste the Soul of Mombasa</p>
-          <h1 className="text-6xl md:text-[100px] font-black uppercase italic tracking-tighter leading-[0.85] mb-8">Digital <br />Menu.</h1>
-          <p className="text-[#1A1A1A]/70 max-w-2xl text-lg font-medium">
-            From cold-pressed coastal juices to decadent artisanal pastries, every item is crafted with 
-            premium local ingredients.
+    <div className="pt-24 min-h-screen bg-[#FFFBF7]">
+      {/* Menu Header */}
+      <section className="bg-[#FFF9F5] border-b border-[#F5E6DA] py-24 px-4 md:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
+          <div className="inline-block bg-pink-100/50 text-pink-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+            ✨ Sweet Selections ✨
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold text-[#2D2D2D] mb-6 tracking-tight leading-none">Our Menu</h1>
+          <p className="text-[#6D6D6D] max-w-2xl text-lg mb-16 leading-relaxed">
+            Every item is a small piece of Mombasa's sunshine, crafted with love and the freshest local ingredients.
           </p>
-        </div>
-      </section>
-
-      {/* Category Tabs */}
-      <section className="bg-white sticky top-[72px] z-40 border-b border-[#1A1A1A]/5">
-        <div className="max-w-7xl mx-auto px-4 overflow-x-auto scroller-hide">
-          <div className="flex space-x-12 py-8 whitespace-nowrap min-w-max">
+          
+          {/* Category Chips */}
+          <div className="flex items-center justify-center gap-4 overflow-x-auto pb-4 scroller-hide w-full max-w-5xl mx-auto px-4">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all pb-1 border-b-2 ${
-                  activeCategory === cat.id ? 'text-[#FF5C00] border-[#FF5C00]' : 'text-[#1A1A1A]/40 border-transparent hover:text-[#1A1A1A]/60'
+                className={`px-8 py-3 rounded-full text-sm font-bold transition-all whitespace-nowrap border-2 transform hover:scale-105 active:scale-95 ${
+                  activeCategory === cat.id
+                    ? 'bg-[#FF7A59] text-white border-[#FF7A59] shadow-lg shadow-orange-100'
+                    : 'bg-white text-[#6D6D6D] border-[#F0EBE6] hover:border-[#FF7A59] hover:text-[#FF7A59]'
                 }`}
               >
                 {cat.name}
@@ -86,89 +85,118 @@ export default function Menu() {
       </section>
 
       {/* Menu Grid */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <AnimatePresence mode="popLayout">
-              {menuItems
-                .filter(item => item.category === activeCategory || activeCategory === 'all')
-                .map((item, idx) => (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3, delay: idx * 0.1 }}
-                    className="group bg-white p-6 rounded-[2.5rem] border border-[#1A1A1A]/5 hover:border-[#1A1A1A]/20 transition-all"
-                  >
-                    <div className="relative aspect-[4/3] rounded-[2rem] overflow-hidden mb-8">
-                      <img 
-                        src={item.img} 
-                        alt={item.name} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        referrerPolicy="no-referrer"
-                      />
+      <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+          <AnimatePresence mode="popLayout">
+            {menuItems
+              .filter((item) => item.category === activeCategory)
+              .map((item) => (
+                <motion.div
+                  key={item.name}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="google-card group bg-white p-4 border-none shadow-sm hover:shadow-2xl transition-all"
+                >
+                  <div className="h-64 overflow-hidden relative rounded-[2rem]">
+                    <img 
+                      src={item.img} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm p-3 rounded-full text-pink-500 hover:text-pink-600 transition-colors shadow-sm cursor-pointer">
+                      <ShoppingBag className="w-5 h-5" />
                     </div>
+                  </div>
+                  <div className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-2xl font-black uppercase italic tracking-tighter text-[#1A1A1A]">{item.name}</h3>
-                      <span className="font-black text-[#FF5C00] text-sm uppercase">KES {item.price}</span>
+                      <h3 className="text-xl font-bold text-[#2D2D2D] transition-colors">{item.name}</h3>
+                      <span className="text-[#FF7A59] font-bold">KES {item.price}</span>
                     </div>
-                    <p className="text-[#1A1A1A]/60 text-xs font-bold uppercase tracking-tighter leading-relaxed mb-8">
+                    <p className="text-[#6D6D6D] text-sm leading-relaxed mb-8 line-clamp-2">
                       {item.desc}
                     </p>
                     <button 
                       onClick={() => handleOrderClick(item.name)}
-                      className="w-full inline-flex items-center justify-center bg-[#1A1A1A] text-white px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-[#FF5C00] transition-colors"
+                      className="w-full bg-[#FF7A59] text-white px-6 py-3.5 rounded-2xl text-sm font-bold hover:bg-[#ff6a42] transition-colors shadow-sm transform active:scale-95"
                     >
-                      Order Now
+                      Sweet Order
                     </button>
-                  </motion.div>
-                ))}
-            </AnimatePresence>
+                  </div>
+                </motion.div>
+              ))}
+          </AnimatePresence>
+        </div>
+        
+        {menuItems.filter(item => item.category === activeCategory).length === 0 && (
+          <div className="text-center py-32 bg-white rounded-[3rem] border-2 border-dashed border-[#F0EBE6]">
+            <div className="text-6xl mb-6">👩‍🍳</div>
+            <p className="text-[#6D6D6D] font-bold text-lg italic">We're fine-tuning these flavours... back in a bit!</p>
           </div>
-          
-          {menuItems.filter(item => item.category === activeCategory).length === 0 && (
-              <div className="text-center py-20 text-gray-400">
-                Coming soon... we're fine-tuning these flavours!
-              </div>
-          )}
+        )}
+      </section>
+
+      {/* Reviews Section at bottom of page content */}
+      <section className="py-24 px-4 bg-[#FFFBF7] border-t border-[#F5E6DA]">
+        <div className="max-w-7xl mx-auto text-center">
+           <h2 className="text-3xl font-bold text-[#2D2D2D] mb-12">Neighborhood Favourites</h2>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { name: "Fatma J.", quote: "The Sunrise juice is magic. Best way to start a Nyali morning!" },
+                { name: "Kevin W.", quote: "That mousse cake... I dream about it. Super cute spot too." },
+                { name: "Sarah M.", quote: "Quality is top tier. You can tell everything is fresh." },
+              ].map((t, i) => (
+                <div key={i} className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-[#F0EBE6]">
+                  <div className="flex text-yellow-400 mb-4 justify-center">
+                    {[1,2,3,4,5].map(star => <Star key={star} className="w-4 h-4 fill-current" />)}
+                  </div>
+                  <p className="text-[#2D2D2D] italic mb-6">"{t.quote}"</p>
+                  <div className="font-bold text-sm text-[#6D6D6D]">— {t.name}</div>
+                </div>
+              ))}
+           </div>
         </div>
       </section>
 
-      {/* Floating Order Info */}
-      <section className="bg-orange-600 text-white py-12 px-4 shadow-2xl shadow-orange-900/20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-bold mb-4">How to Order?</h2>
-            <p className="text-orange-100 mb-8 max-w-md">
-              Order directly via your preferred channel for lightning-fast service. 
-              Available for pickup in Nyali or delivery across Mombasa.
+      {/* Info Section */}
+      <section className="py-24 px-4 bg-white border-t border-[#F5E6DA]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16">
+          <div className="flex-1 space-y-8">
+            <h2 className="text-4xl font-bold text-[#2D2D2D]">Ordering Made Sweet</h2>
+            <p className="text-[#6D6D6D] leading-relaxed text-lg">
+              Pick up your treats or let us bring them to you—either way, it's easy and fast across Mombasa.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex items-center bg-orange-700/50 p-4 rounded-2xl">
-                <ShoppingBag className="w-8 h-8 mr-4 text-orange-200" />
+            <div className="grid sm:grid-cols-2 gap-8">
+              <div className="flex items-start p-8 bg-[#FFF9F5] rounded-[2rem] border-2 border-white shadow-sm">
+                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#FF7A59] mr-6 shrink-0 shadow-sm">
+                  <ShoppingBag className="w-7 h-7" />
+                </div>
                 <div>
-                  <div className="font-bold">Self Pickup</div>
-                  <div className="text-xs text-orange-200">Nyali, Mombasa</div>
+                  <h4 className="font-bold text-[#2D2D2D] text-lg mb-2">Self Pickup</h4>
+                  <p className="text-sm text-[#6D6D6D]">Visit us in Nyali daily from 8am.</p>
                 </div>
               </div>
-              <div className="flex items-center bg-orange-700/50 p-4 rounded-2xl">
-                <Truck className="w-8 h-8 mr-4 text-orange-200" />
+              <div className="flex items-start p-8 bg-[#F0FDF4] rounded-[2rem] border-2 border-white shadow-sm">
+                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-[#34A853] mr-6 shrink-0 shadow-sm">
+                  <Truck className="w-7 h-7" />
+                </div>
                 <div>
-                  <div className="font-bold">Home Delivery</div>
-                  <div className="text-xs text-orange-200">Across Mombasa</div>
+                  <h4 className="font-bold text-[#2D2D2D] text-lg mb-2">Delivery</h4>
+                  <p className="text-sm text-[#6D6D6D]">To your door, anywhere in Mombasa.</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center p-8 bg-white rounded-3xl text-gray-900 text-center">
-            <h3 className="text-xl font-bold mb-2">Ready to Zest?</h3>
-            <p className="text-gray-500 mb-6 text-sm">Our team is online and ready for your order.</p>
+          <div className="md:w-1/3 bg-[#FFFBF7] p-12 rounded-[3rem] text-center flex flex-col justify-center border-4 border-white shadow-xl">
+            <h3 className="text-3xl font-bold text-[#2D2D2D] mb-4">Ready to Zest?</h3>
+            <p className="text-[#6D6D6D] text-sm mb-10 leading-relaxed">Choose your preferred way to contact us for the fastest service.</p>
             <button 
               onClick={() => handleOrderClick()}
-              className="w-full bg-orange-600 text-white py-4 rounded-2xl font-bold hover:bg-orange-700 transition shadow-lg shadow-orange-200"
+              className="bg-[#FF7A59] text-white py-4 rounded-full font-bold hover:bg-[#ff6a42] transition-colors shadow-lg transform hover:scale-105 active:scale-95"
             >
-              Choose Order Option
+              Order Now
             </button>
           </div>
         </div>

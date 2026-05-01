@@ -29,44 +29,51 @@ export default function Navbar() {
   return (
     <>
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-[#FAF9F6]/80 backdrop-blur-md border-b border-[#1A1A1A]/5 py-4' : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? 'bg-white/90 backdrop-blur-md shadow-xl shadow-pink-50/50 py-4' : 'bg-transparent py-6'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-[#FF5C00] rounded-full flex items-center justify-center">
-            <span className="text-white font-black text-xl">T</span>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+        <Link to="/" className="flex items-center space-x-4 group">
+          <div className="w-10 h-10 bg-[#FF7A59] rounded-2xl flex items-center justify-center shadow-lg transform group-hover:rotate-12 transition-transform">
+            <span className="text-white font-bold text-xl">T</span>
           </div>
-          <span className="text-2xl font-black uppercase tracking-tighter text-[#1A1A1A]">TORIAH'S FINEST</span>
+          <div className="flex flex-col">
+            <span className="text-xl font-bold tracking-tight text-[#2D2D2D]">Toriah's Finest</span>
+            <span className="text-[10px] font-bold text-[#FF7A59] uppercase tracking-widest leading-none">Fresh & Coastal</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-10">
+        <div className="hidden md:flex items-center space-x-2 bg-white/50 p-1.5 rounded-full border border-white shadow-sm">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`text-xs font-bold uppercase tracking-widest transition-colors hover:text-[#FF5C00] ${
-                location.pathname === link.path ? 'text-[#FF5C00]' : 'text-[#1A1A1A]'
+              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${
+                location.pathname === link.path 
+                  ? 'text-[#FF7A59] bg-[#FFF9F5] shadow-sm' 
+                  : 'text-[#6D6D6D] hover:text-[#FF7A59] hover:bg-white'
               }`}
             >
               {link.name}
             </Link>
           ))}
-          <button
-            onClick={() => setIsOrderOpen(true)}
-            className="border-2 border-[#1A1A1A] text-[#1A1A1A] px-6 py-2 text-xs font-black uppercase tracking-widest hover:bg-[#1A1A1A] hover:text-white transition-colors"
-          >
-            Order Now
-          </button>
+          <div className="ml-2 pl-2 border-l border-[#F0EBE6]">
+            <button
+              onClick={() => setIsOrderOpen(true)}
+              className="bg-[#FF7A59] text-white px-8 py-2.5 rounded-full text-sm font-bold hover:bg-[#ff6a42] transition-all shadow-lg shadow-orange-100 transform active:scale-95"
+            >
+              Order Now
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu button */}
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-[#1A1A1A] hover:text-[#FF5C00] p-2"
+            className="w-12 h-12 flex items-center justify-center bg-white rounded-2xl shadow-sm border border-[#F0EBE6] text-[#2D2D2D]"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -77,33 +84,33 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden bg-white border-b-4 border-[#FFF9F5] overflow-hidden shadow-2xl"
           >
-            <div className="px-4 pt-2 pb-6 space-y-1">
+            <div className="px-6 pt-4 pb-10 space-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-4 text-[10px] font-black uppercase tracking-[0.2em] ${
-                    location.pathname === link.path ? 'text-[#FF5C00] bg-orange-50 rounded-lg' : 'text-[#1A1A1A]'
+                  className={`block px-6 py-4 text-xl font-bold rounded-3xl transition-all ${
+                    location.pathname === link.path ? 'text-[#FF7A59] bg-[#FFF9F5]' : 'text-[#2D2D2D]'
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 px-3">
+              <div className="pt-6">
                 <button
                   onClick={() => {
                     setIsOpen(false);
                     setIsOrderOpen(true);
                   }}
-                  className="w-full bg-[#1A1A1A] text-white px-5 py-4 rounded-xl text-center text-[10px] font-black uppercase tracking-[0.2em] hover:bg-[#FF5C00] transition-colors"
+                  className="w-full bg-[#FF7A59] text-white px-8 py-5 rounded-[2rem] text-center font-bold text-lg shadow-xl shadow-orange-100 transition-all active:scale-95"
                 >
-                  Place Order
+                  Order Now 🍹
                 </button>
               </div>
             </div>

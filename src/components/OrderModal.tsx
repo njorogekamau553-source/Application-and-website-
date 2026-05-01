@@ -21,62 +21,70 @@ export default function OrderModal({ isOpen, onClose, itemName }: OrderModalProp
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-[#1A1A1A]/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-[#2D2D2D]/60 backdrop-blur-md"
           />
           <motion.div
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative bg-[#FAF9F6] w-full max-w-md rounded-[3rem] overflow-hidden shadow-2xl p-8"
+            initial={{ scale: 0.9, opacity: 0, y: 50, rotate: -2 }}
+            animate={{ scale: 1, opacity: 1, y: 0, rotate: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 50, rotate: 2 }}
+            className="relative bg-white w-full max-w-md rounded-[3rem] overflow-hidden shadow-3xl shadow-pink-100/50 p-10 border-4 border-[#FFF9F5]"
           >
             <button 
               onClick={onClose}
-              className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 transition-colors"
+              className="absolute top-8 right-8 p-3 rounded-full bg-gray-50 hover:bg-pink-50 text-[#6D6D6D] hover:text-pink-500 transition-all transform hover:rotate-90"
             >
-              <X className="w-5 h-5 text-gray-400" />
+              <X className="w-5 h-5" />
             </button>
 
             <div className="mb-10 text-center">
-              <p className="text-[#FF5C00] font-black uppercase text-[10px] tracking-widest italic mb-3">Place Your Order</p>
-              <h2 className="text-3xl font-black uppercase italic tracking-tighter leading-none italic">
-                Choose <br />Channel.
+              <div className="w-16 h-16 bg-[#FFF9F5] rounded-3xl flex items-center justify-center mx-auto mb-6 transform -rotate-12 border border-[#F5E6DA]">
+                <ShoppingBag className="w-8 h-8 text-[#FF7A59]" />
+              </div>
+              <h2 className="text-3xl font-bold text-[#2D2D2D] mb-4">
+                Let's Order!
               </h2>
+              <p className="text-[#6D6D6D] font-medium">Pick your favorite way to reach us.</p>
               {itemName && (
-                <p className="mt-4 text-xs font-bold uppercase text-[#1A1A1A]/40">Ordering: {itemName}</p>
+                <div className="mt-6 inline-block bg-pink-100/50 border border-pink-100 px-6 py-2 rounded-full text-pink-600 text-sm font-bold">
+                  Picking: {itemName} 🍒
+                </div>
               )}
             </div>
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-6">
               <a 
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-6 bg-white border border-[#1A1A1A]/5 rounded-2xl hover:border-[#008148] transition-all group"
+                className="flex items-center p-6 bg-white border-2 border-[#F0EBE6] rounded-[2rem] hover:border-[#34A853] hover:bg-[#F0FDF4] transition-all group"
               >
-                <div className="w-12 h-12 bg-[#008148]/10 rounded-xl flex items-center justify-center text-[#008148] mr-6 group-hover:bg-[#008148] group-hover:text-white transition-colors">
-                  <MessageCircle className="w-6 h-6" />
+                <div className="w-14 h-14 bg-[#F0FDF4] rounded-2xl flex items-center justify-center text-[#34A853] mr-6 group-hover:scale-110 transition-transform">
+                  <MessageCircle className="w-7 h-7" />
                 </div>
-                <div className="text-left font-black uppercase text-xs tracking-widest">WhatsApp Business</div>
+                <div className="text-left">
+                  <div className="font-bold text-[#2D2D2D] text-lg">WhatsApp</div>
+                  <div className="text-sm text-[#6D6D6D] font-medium">Super fast & easy</div>
+                </div>
               </a>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <a 
                   href={`tel:${phoneNumber}`}
-                  className="flex flex-col items-center p-6 bg-white border border-[#1A1A1A]/5 rounded-2xl hover:border-[#1A1A1A] transition-all group"
+                  className="flex flex-col items-center p-8 bg-white border-2 border-[#F0EBE6] rounded-[2rem] hover:border-blue-400 hover:bg-blue-50 transition-all group"
                 >
-                  <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center text-[#1A1A1A] mb-4 group-hover:bg-[#1A1A1A] group-hover:text-white transition-colors">
-                    <Phone className="w-5 h-5" />
+                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 mb-4 group-hover:scale-110 transition-transform">
+                    <Phone className="w-6 h-6" />
                   </div>
-                  <div className="text-[10px] font-black uppercase tracking-widest">Call Now</div>
+                  <div className="font-bold text-[#2D2D2D]">Call Us</div>
                 </a>
                 <a 
                   href={`sms:${phoneNumber}`}
-                  className="flex flex-col items-center p-6 bg-white border border-[#1A1A1A]/5 rounded-2xl hover:border-[#FF5C00] transition-all group"
+                  className="flex flex-col items-center p-8 bg-white border-2 border-[#F0EBE6] rounded-[2rem] hover:border-[#FF7A59] hover:bg-orange-50 transition-all group"
                 >
-                  <div className="w-10 h-10 bg-orange-100/50 rounded-xl flex items-center justify-center text-[#FF5C00] mb-4 group-hover:bg-[#FF5C00] group-hover:text-white transition-colors">
-                    <MessageSquare className="w-5 h-5" />
+                  <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-[#FF7A59] mb-4 group-hover:scale-110 transition-transform">
+                    <MessageSquare className="w-6 h-6" />
                   </div>
-                  <div className="text-[10px] font-black uppercase tracking-widest">Send SMS</div>
+                  <div className="font-bold text-[#2D2D2D]">Text Me</div>
                 </a>
               </div>
 
@@ -84,18 +92,22 @@ export default function OrderModal({ isOpen, onClose, itemName }: OrderModalProp
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center p-6 bg-white border border-[#1A1A1A]/5 rounded-2xl hover:border-[#E1306C] transition-all group"
+                className="flex items-center p-6 bg-white border-2 border-[#F0EBE6] rounded-[2rem] hover:border-[#E1306C] hover:bg-pink-50 transition-all group"
               >
-                <div className="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center text-[#E1306C] mr-6 group-hover:bg-[#E1306C] group-hover:text-white transition-colors">
-                  <Instagram className="w-6 h-6" />
+                <div className="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center text-[#E1306C] mr-6 group-hover:scale-110 transition-transform">
+                  <Instagram className="w-7 h-7" />
                 </div>
-                <div className="text-left font-black uppercase text-xs tracking-widest">Instagram DM</div>
+                <div className="text-left">
+                  <div className="font-bold text-[#2D2D2D] text-lg">Instagram DM</div>
+                  <div className="text-sm text-[#6D6D6D] font-medium">@toriahsfinesttastes</div>
+                </div>
               </a>
             </div>
             
-            <p className="mt-8 text-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-              Available daily 8:00 am — 5:00 pm
-            </p>
+            <div className="mt-10 pt-8 border-t border-[#F0EBE6] flex items-center justify-center text-xs font-bold text-[#6D6D6D] uppercase tracking-widest">
+              <Clock className="w-4 h-4 mr-3 text-pink-400" />
+              <span>Mon-Sun: 8am — 5pm</span>
+            </div>
           </motion.div>
         </div>
       )}

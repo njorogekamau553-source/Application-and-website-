@@ -1,14 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Outfit:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", sans-serif;
+  --font-sans: "Quicksand", "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Quicksand", sans-serif;
+  
+  --color-brand-pink: #fdf2f8;
+  --color-brand-peach: #fff7ed;
+  --color-brand-mint: #f0fdf4;
+  --color-brand-blue: #eff6ff;
+  
+  --color-google-blue: #1a73e8;
+  --color-google-gray: #5f6368;
+  --color-google-border: #dadce0;
 }
 
 @layer base {
   body {
-    @apply bg-[#FAF9F6] text-[#1A1A1A] font-sans;
+    @apply bg-[#FFFBF7] text-[#2D2D2D] font-sans;
   }
 }
 
@@ -18,5 +27,13 @@
 .scroller-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.google-card {
+  @apply bg-white border border-[#F0EBE6] rounded-[2.5rem] hover:shadow-xl hover:shadow-pink-100/50 transition-all duration-500;
+}
+
+.google-section {
+  @apply py-24 px-4 md:px-12 max-w-7xl mx-auto;
 }
 
