@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#FAF9F6] text-[#1A1A1A] font-sans;
+  }
+}
+
+.scroller-hide::-webkit-scrollbar {
+  display: none;
+}
+.scroller-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
